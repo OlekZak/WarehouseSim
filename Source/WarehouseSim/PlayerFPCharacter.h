@@ -34,6 +34,10 @@ private:
 
 	void Turn(float Value);
 	void LookUp(float Value);
+	
+	void CheckJump();
+	UPROPERTY()
+		bool bJumping;
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
 		UCameraComponent* PlayerCamera;

@@ -16,6 +16,8 @@ APlayerFPCharacter::APlayerFPCharacter()
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	PlayerCamera->SetupAttachment(RootComponent);
 	PlayerCamera->SetRelativeLocation(FVector(0, 0, 40));
+
+	bJumping = false;
 }
 
 // Called when the game starts or when spawned
@@ -30,6 +32,11 @@ void APlayerFPCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (bJumping)
+	{
+		Jump();
+	}
+
 }
 
 // Called to bind functionality to input
@@ -41,7 +48,9 @@ void APlayerFPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	InputComponent->BindAxis("Right", this, &APlayerFPCharacter::MoveRight);
 	InputComponent->BindAxis("LookRight", this, &APlayerFPCharacter::Turn);
 	InputComponent->BindAxis("LookUP", this, &APlayerFPCharacter::LookUp);
-	
+
+	InputComponent->BindAction("Jump", IE_Pressed, this, &APlayerFPCharacter::CheckJump);
+	InputComponent->BindAction("Jump", IE_Released, this, &APlayerFPCharacter::CheckJump);
 }
 
 void APlayerFPCharacter::MoveForward(float value)
@@ -76,4 +85,16 @@ void APlayerFPCharacter::LookUp(float value)
 			PlayerCamera->AddLocalRotation(FRotator(value, 0, 0));
 		}
 	} 
+}
+
+void APlayerFPCharacter::CheckJump()
+{
+	if (bJumping)
+	{
+		bJumping = false;
+	}
+	else
+	{
+		bJumping = true;
+	}
 }
