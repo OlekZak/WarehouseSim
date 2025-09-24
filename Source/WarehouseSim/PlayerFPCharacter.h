@@ -20,6 +20,10 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+	UCameraComponent* PlayerCamera;
+	
 
 public:	
 	// Called every frame
@@ -39,7 +43,5 @@ private:
 	UPROPERTY()
 		bool bJumping;
 
-	UPROPERTY(EditAnywhere, Category = "Camera")
-		UCameraComponent* PlayerCamera;
 	
 };
