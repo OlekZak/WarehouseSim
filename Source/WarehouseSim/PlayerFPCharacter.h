@@ -6,7 +6,9 @@
 #include "GameFramework/Character.h"
 #include "Components/ActorComponent.h"
 #include "Camera/CameraComponent.h"
+#include "WarehouseSim/WarehouseInstance.h"
 #include "PlayerFPCharacter.generated.h"
+
 
 UCLASS()
 class WAREHOUSESIM_API APlayerFPCharacter : public ACharacter
@@ -16,6 +18,9 @@ class WAREHOUSESIM_API APlayerFPCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	APlayerFPCharacter();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UpgradteData")
+		TMap<FString, FUpgradeData> UpgradeData;
 
 protected:
 	// Called when the game starts or when spawned
